@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SuperMovies2</string>
+    <string name="base_url" translatable="false">https://api.themoviedb.org/3/</string>
+    <string name="movie_image" translatable="false">Movie image</string>
+</resources>
