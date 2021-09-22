@@ -6,4 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".ui.GenreActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:title="@string/app_name"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_movie_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Name"
+                />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_overview"
+                />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_movie_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="This is the overview"
+                />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_release_date"
+                />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="01 - 01 -2000"
+                />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title_original_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_original_language"
+                />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_original_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="en"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

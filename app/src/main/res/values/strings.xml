@@ -3,4 +3,7 @@
     <string name="base_url" translatable="false">https://api.themoviedb.org/3/</string>
     <string name="movie_image" translatable="false">Movie image</string>
     <string name="title_activity_genre">GenreActivity</string>
+    <string name="title_overview">Overview</string>
+    <string name="title_release_date">Release date</string>
+    <string name="title_original_language">Original language</string>
 </resources>
