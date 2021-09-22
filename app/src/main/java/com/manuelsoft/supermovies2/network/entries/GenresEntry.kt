@@ -5,5 +5,5 @@ import com.manuelsoft.supermovies2.model.Genre
 
 data class GenresEntry(
     @field:SerializedName("genres")
-    val genreList : List<Genre>
+    val genreList: List<Genre>
 )

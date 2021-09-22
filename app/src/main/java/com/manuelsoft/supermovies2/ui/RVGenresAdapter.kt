@@ -15,7 +15,7 @@ class RVGenresAdapter : RecyclerView.Adapter<RVGenresAdapter.MyViewHolder>() {
     val TAG = RVGenresAdapter::class.java.name
 
     private lateinit var onGenreClick: (Genre) -> Unit
-    private var genres : List<Genre> = emptyList()
+    private var genres: List<Genre> = emptyList()
 
     fun setData(genres: List<Genre>) {
         this.genres = genres
@@ -50,7 +50,7 @@ class RVGenresAdapter : RecyclerView.Adapter<RVGenresAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : ViewHolder(itemView) {
         lateinit var genre: Genre
-        val txtView : TextView = itemView.findViewById(R.id.tv_item)
+        val txtView: TextView = itemView.findViewById(R.id.tv_item)
     }
 
 }

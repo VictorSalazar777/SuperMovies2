@@ -9,16 +9,16 @@ import com.manuelsoft.supermovies2.repository.Repository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(private val repository : Repository) : BaseViewModel() {
+class MainActivityViewModel(private val repository: Repository) : BaseViewModel() {
 
     val TAG = MainActivityViewModel::class.java.name
 
     private val _genres = MutableLiveData<List<Genre>>()
 
-    val genres : LiveData<List<Genre>>
+    val genres: LiveData<List<Genre>>
         get() = _genres
 
-    fun loadGenres() : Job {
+    fun loadGenres(): Job {
         return viewModelScope.launch {
             try {
                 _genres.value = repository.getGenres()

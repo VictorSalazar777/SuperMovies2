@@ -3,7 +3,7 @@ package com.manuelsoft.supermovies2.network.entries
 import com.google.gson.annotations.SerializedName
 import com.manuelsoft.supermovies2.model.PopularMoviesByGenre
 
-data class PopularMoviesByGenreEntry (
+data class PopularMoviesByGenreEntry(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")

@@ -2,13 +2,9 @@ package com.manuelsoft.supermovies2.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
-import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

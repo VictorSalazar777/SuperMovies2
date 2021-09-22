@@ -7,13 +7,13 @@ import com.manuelsoft.supermovies2.repository.RepositoryImpl
 
 class Injector(private var repository: Repository) {
 
-    fun getMainActivityViewModel(activity: MainActivity) : MainActivityViewModel {
+    fun getMainActivityViewModel(activity: MainActivity): MainActivityViewModel {
         val viewModelFactory = ViewModelFactory(repository)
         return ViewModelProvider(activity, viewModelFactory)
             .get(MainActivityViewModel::class.java)
     }
 
-    fun getGenreActivityViewModel(activity: GenreActivity) : GenreActivityViewModel {
+    fun getGenreActivityViewModel(activity: GenreActivity): GenreActivityViewModel {
         val viewModelFactory = ViewModelFactory(repository)
         return ViewModelProvider(activity, viewModelFactory)
             .get(GenreActivityViewModel::class.java)
@@ -23,7 +23,7 @@ class Injector(private var repository: Repository) {
         private var injector: Injector? = null
 
         @JvmStatic
-        fun getInjector(context: Context) : Injector {
+        fun getInjector(context: Context): Injector {
             if (injector == null) {
                 injector = Injector(RepositoryImpl(context.applicationContext))
             }
