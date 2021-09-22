@@ -3,14 +3,13 @@ package com.manuelsoft.supermovies2.ui
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.manuelsoft.supermovies2.model.Genre
 import com.manuelsoft.supermovies2.repository.Repository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(private val repository : Repository) : ViewModel() {
+class MainActivityViewModel(private val repository : Repository) : BaseViewModel() {
 
     val TAG = MainActivityViewModel::class.java.name
 
@@ -29,5 +28,7 @@ class MainActivityViewModel(private val repository : Repository) : ViewModel() {
         }
     }
 
-
+    fun saveGenre(genre: Genre) {
+        repository.saveGenre(genre)
+    }
 }

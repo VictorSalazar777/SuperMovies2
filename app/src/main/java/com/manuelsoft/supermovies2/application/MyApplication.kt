@@ -1,0 +1,12 @@
+package com.manuelsoft.supermovies2.application
+
+import android.app.Application
+
+class MyApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+    }
+
+
+}
