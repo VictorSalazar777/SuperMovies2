@@ -18,7 +18,9 @@ interface RetrofitApi {
     suspend fun discoverMovies(@Query("api_key") apiKey: String,
                        @Query("with_genres") genre:String) : DiscoverMoviesResult
 
-    @GET("/discover/movie?sort_by=popularity.desc&include_adult=false")
+    @GET("discover/movie")
     suspend fun popularMoviesByGenre(@Query("api_key") apiKey: String,
-                                     @Query("with_genres") genre:String) : PopularMoviesByGenreEntry
+                                     @Query("sort_by") sortBy: String,
+                                     @Query("include_adult") includeAdult: String,
+                                     @Query("with_genres") genreId: String) : PopularMoviesByGenreEntry
 }

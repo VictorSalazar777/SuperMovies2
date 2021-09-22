@@ -14,8 +14,8 @@ class RepositoryImpl(context: Context) : Repository {
         return retrofitService.getGenres().genreList
     }
 
-    override suspend fun popularMoviesByGenre(genre : String): List<PopularMoviesByGenre> {
-        return retrofitService.popularMoviesByGenre(genre).results
+    override suspend fun popularMoviesByGenre(genreId : String): List<PopularMoviesByGenre> {
+        return retrofitService.popularMoviesByGenre(genreId).results
     }
 
     override fun saveGenre(genre: Genre) {

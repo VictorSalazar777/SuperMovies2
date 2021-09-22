@@ -23,8 +23,9 @@ class RetrofitServiceImpl(context: Context) : RetrofitService  {
         return retrofitApi.discoverMovies(apiKey, genre)
     }
 
-    override suspend fun popularMoviesByGenre(genre: String): PopularMoviesByGenreEntry {
-        return retrofitApi.popularMoviesByGenre(apiKey, genre)
+    override suspend fun popularMoviesByGenre(genreId: String): PopularMoviesByGenreEntry {
+        return retrofitApi.popularMoviesByGenre(apiKey, "popularity.desc",
+            "false", genreId)
     }
 
 

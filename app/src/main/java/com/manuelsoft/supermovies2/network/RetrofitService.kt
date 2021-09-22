@@ -11,5 +11,5 @@ interface RetrofitService {
 
     suspend fun getDiscoveredMovies(genre: String) : DiscoverMoviesResult
 
-    suspend fun popularMoviesByGenre(genre : String) : PopularMoviesByGenreEntry
+    suspend fun popularMoviesByGenre(genreId : String) : PopularMoviesByGenreEntry
 }
