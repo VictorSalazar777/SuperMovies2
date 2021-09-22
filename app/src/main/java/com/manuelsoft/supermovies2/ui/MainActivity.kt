@@ -9,17 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.manuelsoft.supermovies2.R
+import com.manuelsoft.supermovies2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupToolbar()
 
         val rvGenresAdapter = RVGenresAdapter()
-        val genresView = findViewById<RecyclerView>(R.id.rv_genres)
-        genresView.apply {
+        binding.rvGenres.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
             adapter = rvGenresAdapter
@@ -35,15 +38,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val btn = findViewById<MaterialButton>(R.id.btn_show)
-        btn.setOnClickListener {
+        binding.btnShow.setOnClickListener {
             viewModel.loadGenres()
         }
 
     }
 
     private fun setupToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
     }
 }
