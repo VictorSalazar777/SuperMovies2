@@ -1,11 +1,17 @@
 package com.manuelsoft.supermovies2.ui
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.manuelsoft.supermovies2.databinding.ActivityGenreBinding
-import com.manuelsoft.supermovies2.model.Genre
 import com.manuelsoft.supermovies2.model.PopularMoviesByGenre
+
 
 class GenreActivity : AppCompatActivity() {
 
@@ -18,9 +24,12 @@ class GenreActivity : AppCompatActivity() {
         binding = ActivityGenreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupToolbar()
+
         val viewModel = Injector.getInjector(this).getGenreActivityViewModel(this)
         viewModel.popularMovies.observe(this, {
             popularMovie = it[0]
+            getPoster(popularMovie.posterPath)
             binding.apply {
                 tvMovieName.text = popularMovie.title
                 tvMovieOverview.text = popularMovie.overview
@@ -31,4 +40,41 @@ class GenreActivity : AppCompatActivity() {
 
         viewModel.loadFavoriteMoviesByGenre(viewModel.loadGenre().id.toString())
     }
+
+    private fun getPoster(path: String) {
+        val url = "https://image.tmdb.org/t/p/w300$path"
+        binding.progressCircular.visibility = View.VISIBLE
+        Glide.with(this)
+            .load(url)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    binding.progressCircular.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    binding.progressCircular.visibility = View.GONE
+                    return false
+                }
+
+            })
+            .into(binding.ivPoster)
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar2)
+    }
+
+
 }
