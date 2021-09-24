@@ -20,6 +20,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="8dp"
         android:fillViewport="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +33,8 @@
             android:orientation="vertical"
             >
             <FrameLayout
-                android:layout_width="300dp"
-                android:layout_height="500dp"
+                android:layout_width="270dp"
+                android:layout_height="450dp"
                 android:layout_gravity="center_horizontal"
                 >
                 <ProgressBar
@@ -55,13 +56,18 @@
                 android:id="@+id/tv_movie_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 tools:text="Name"
                 />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_title_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:text="@string/title_overview"
+                android:textStyle="bold"
                 />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_movie_overview"
@@ -74,6 +80,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_release_date"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_release_date"
@@ -86,6 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_original_language"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_original_language"
