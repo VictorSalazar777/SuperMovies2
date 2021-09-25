@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:layout_gravity="center"
     android:background="@color/purple_200"
     android:padding="2dp"
     >
@@ -11,13 +11,25 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:gravity="center"
         />
-    <ImageView
-        android:id="@+id/iv_item_poster_small"
+
+    <ProgressBar
+        android:id="@+id/progress_circular_poster_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iv_item_poster_small"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
         android:contentDescription="poster"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_horizontal"
+
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

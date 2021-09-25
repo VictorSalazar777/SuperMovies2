@@ -2,17 +2,19 @@ package com.manuelsoft.supermovies2.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.manuelsoft.supermovies2.databinding.ListItemBinding
 import com.manuelsoft.supermovies2.model.PopularMovie
 import java.util.*
 
-class RVGenresAdapter : RecyclerView.Adapter<RVGenresAdapter.MyViewHolder>() {
+class RVPopularMoviesAdapter : RecyclerView.Adapter<RVPopularMoviesAdapter.MyViewHolder>() {
 
-    val TAG = RVGenresAdapter::class.java.name
+    val TAG = RVPopularMoviesAdapter::class.java.name
 
-    private lateinit var onSelectedMovieClick: (PopularMovie) -> Unit
+    private lateinit var openSelectedMovie: (PopularMovie) -> Unit
+    private lateinit var loadSmallImage: (String, ListItemBinding) -> Unit
     private var popularMovies: MutableList<PopularMovie> = LinkedList()
 
     fun setData(basicPopularMovies: List<PopularMovie>) {
@@ -35,8 +37,12 @@ class RVGenresAdapter : RecyclerView.Adapter<RVGenresAdapter.MyViewHolder>() {
         notifyItemRangeRemoved(0, lastIndex)
     }
 
-    fun setOpenSelectedMovie(onMovieClick: (PopularMovie) -> Unit) {
-        this.onSelectedMovieClick = onMovieClick
+    fun setOpenSelectedMovie(openSelectedMovie: (PopularMovie) -> Unit) {
+        this.openSelectedMovie = openSelectedMovie
+    }
+
+    fun setLoadSmallImage(loadSmallImage: (String, ListItemBinding) -> Unit) {
+        this.loadSmallImage = loadSmallImage
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -46,22 +52,26 @@ class RVGenresAdapter : RecyclerView.Adapter<RVGenresAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.setData(popularMovies[position])
-        holder.itemView.setOnClickListener {
-            onSelectedMovieClick(popularMovies[position])
-        }
+        holder.setData(popularMovies[position], loadSmallImage, openSelectedMovie)
     }
 
     override fun getItemCount(): Int {
         return popularMovies.size
     }
 
-    class MyViewHolder(private val binding: ListItemBinding) : ViewHolder(binding.root) {
-        private var id = 0
+    class MyViewHolder(private val listItemBinding: ListItemBinding) : ViewHolder(listItemBinding.root) {
 
-        fun setData(popularMovie: PopularMovie) {
-            binding.tvName.text = popularMovie.title
-            id = popularMovie.id
+        private lateinit var popularMovie: PopularMovie
+
+        fun setData(popularMovie: PopularMovie,
+                    loadSmallImage: (String, ListItemBinding) -> Unit,
+                    openSelectedMovie: (PopularMovie) -> Unit) {
+            this.popularMovie = popularMovie
+            listItemBinding.tvName.text = popularMovie.title
+            loadSmallImage(popularMovie.posterPath, listItemBinding)
+            itemView.setOnClickListener {
+                openSelectedMovie(this.popularMovie)
+            }
         }
     }
 

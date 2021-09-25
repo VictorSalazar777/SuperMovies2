@@ -38,7 +38,7 @@
             tools:context=".ui.MainActivity">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_genres"
+                android:id="@+id/rv_popular_movies"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toTopOf="parent"
