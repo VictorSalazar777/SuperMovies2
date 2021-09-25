@@ -8,15 +8,17 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.databinding.ActivityMainBinding
+import com.manuelsoft.supermovies2.model.Genre
+import com.manuelsoft.supermovies2.model.PopularMovie
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val TAG = MainActivity::class.java.name
+    val TAG: String = MainActivity::class.java.name
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var rvGenresAdapter: RVGenresAdapter
@@ -28,12 +30,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupToolbar()
         createViewModel()
-        createRVGenresAdapter()
-        setupRvGenres()
+        createGenresRecyclerViewAdapter()
+        setupGenresRecyclerView()
         setupNavigationView()
-        showRVGenres()
-        startGenreActivity()
-        setupBtnShow()
+        observeGenresFromViewModel()
+        setLoadMovieSelected()
+        viewModel.loadGenres()
+        observePopularMoviesFromViewModel()
     }
 
     private fun setupNavigationView() {
@@ -46,46 +49,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupBtnShow() {
-        binding.btnShow.setOnClickListener {
-            viewModel.loadGenres()
-        }
-    }
-
-    private fun startGenreActivity() {
-        rvGenresAdapter.setOpenFavorites {
-            val intent = Intent(this, GenreActivity::class.java)
-            viewModel.saveGenre(it)
-            startActivity(intent)
-        }
-    }
-
-    private fun showRVGenres() {
+    private fun observeGenresFromViewModel() {
         viewModel.genres.observe(this, { t ->
-            navGenreMenuItems = LinkedList()
-            rvGenresAdapter.setData(t)
-            t.forEach { genre ->
-                val item = binding.navigationView.menu.add(NONE, genre.id, NONE, genre.name)
-                navGenreMenuItems.add(item)
-                MenuItemCompat.setContentDescription(item, genre.name)
-                item.setOnMenuItemClickListener {
-                    Log.d(TAG, "${MenuItemCompat.getContentDescription(it)}, ${it.itemId}")
-                    hideDrawer()
-                    true
-                }
-            }
+            showGenres(t)
         })
     }
 
-    private fun setupRvGenres() {
+    private fun showGenres(genres: List<Genre>) {
+        navGenreMenuItems = LinkedList()
+        genres.forEach { genre ->
+            val item = binding.navigationView.menu.add(NONE, genre.id, NONE, genre.name)
+            navGenreMenuItems.add(item)
+            MenuItemCompat.setContentDescription(item, genre.name)
+            item.setOnMenuItemClickListener {
+                Log.d(TAG, "${MenuItemCompat.getContentDescription(it)}, ${it.itemId}")
+                hideDrawer()
+                viewModel.loadFavoriteMoviesByGenre(it.itemId.toString())
+                true
+            }
+        }
+        viewModel.loadFavoriteMoviesByGenre(genres[0].id.toString())
+    }
+
+    private fun setupGenresRecyclerView() {
         binding.rvGenres.apply {
             layoutManager =
-                LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+                GridLayoutManager(this@MainActivity,
+                    2, RecyclerView.VERTICAL,
+                    false)
             adapter = rvGenresAdapter
         }
     }
 
-    private fun createRVGenresAdapter() {
+    private fun createGenresRecyclerViewAdapter() {
         rvGenresAdapter = RVGenresAdapter()
     }
 
@@ -119,4 +115,33 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
+    private fun observePopularMoviesFromViewModel() {
+        viewModel.popularMovies.observe(this, {
+            showPopularMoviesOfTheSelectedGenre(it)
+        })
+    }
+
+    private fun showPopularMoviesOfTheSelectedGenre(popularMovies : List<PopularMovie>) {
+        if (rvGenresAdapter.itemCount > 0) {
+            rvGenresAdapter.removeDataWithoutNotify()
+            rvGenresAdapter.notifyDataChanged()
+        }
+        rvGenresAdapter.setData(popularMovies)
+        rvGenresAdapter.notifyDataChanged()
+
+    }
+
+    private fun setLoadMovieSelected() {
+        rvGenresAdapter.setOpenSelectedMovie {
+            viewModel.saveSelectedPopularMovie(it)
+            startGenreActivity()
+        }
+    }
+
+    private fun startGenreActivity() {
+        val intent = Intent(this, GenreActivity::class.java)
+        startActivity(intent)
+    }
+
 }

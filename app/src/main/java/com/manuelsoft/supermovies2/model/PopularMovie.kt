@@ -2,7 +2,7 @@ package com.manuelsoft.supermovies2.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PopularMoviesByGenre(
+data class PopularMovie(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")

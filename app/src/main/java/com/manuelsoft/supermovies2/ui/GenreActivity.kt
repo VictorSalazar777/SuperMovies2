@@ -10,14 +10,14 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.manuelsoft.supermovies2.databinding.ActivityGenreBinding
-import com.manuelsoft.supermovies2.model.PopularMoviesByGenre
+import com.manuelsoft.supermovies2.model.PopularMovie
 
 
 class GenreActivity : AppCompatActivity() {
 
     val TAG = GenreActivity::class.java.name
     private lateinit var binding: ActivityGenreBinding
-    private lateinit var popularMovie: PopularMoviesByGenre
+    private lateinit var popularMovie: PopularMovie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,18 +27,16 @@ class GenreActivity : AppCompatActivity() {
         setupToolbar()
 
         val viewModel = Injector.getInjector(this).getGenreActivityViewModel(this)
-        viewModel.popularMovies.observe(this, {
-            popularMovie = it[0]
-            getPoster(popularMovie.posterPath)
-            binding.apply {
-                tvMovieName.text = popularMovie.title
-                tvMovieOverview.text = popularMovie.overview
-                tvReleaseDate.text = popularMovie.releaseDate
-                tvOriginalLanguage.text = popularMovie.originalLanguage
-            }
-        })
+        popularMovie = viewModel.loadSelectedPopularMovie()
 
-        viewModel.loadFavoriteMoviesByGenre(viewModel.loadGenre().id.toString())
+        getPoster(popularMovie.posterPath)
+
+        binding.apply {
+            tvMovieName.text = popularMovie.title
+            tvMovieOverview.text = popularMovie.overview
+            tvReleaseDate.text = popularMovie.releaseDate
+            tvOriginalLanguage.text = popularMovie.originalLanguage
+        }
     }
 
     private fun getPoster(path: String) {

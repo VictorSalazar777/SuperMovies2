@@ -5,11 +5,19 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/purple_200"
+    android:padding="2dp"
     >
-    <TextView
-        android:id="@+id/tv_item"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        />
+    <ImageView
+        android:id="@+id/iv_item_poster_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="poster"
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

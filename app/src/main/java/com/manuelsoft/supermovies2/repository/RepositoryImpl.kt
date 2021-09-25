@@ -2,27 +2,27 @@ package com.manuelsoft.supermovies2.repository
 
 import android.content.Context
 import com.manuelsoft.supermovies2.model.Genre
-import com.manuelsoft.supermovies2.model.PopularMoviesByGenre
+import com.manuelsoft.supermovies2.model.PopularMovie
 import com.manuelsoft.supermovies2.network.RetrofitServiceImpl
 
 class RepositoryImpl(context: Context) : Repository {
 
     private val retrofitService = RetrofitServiceImpl(context)
-    private lateinit var genre: Genre
+    private lateinit var selectedPopularMovie: PopularMovie
 
     override suspend fun getGenres(): List<Genre> {
         return retrofitService.getGenres().genreList
     }
 
-    override suspend fun popularMoviesByGenre(genreId: String): List<PopularMoviesByGenre> {
+    override suspend fun popularMoviesByGenre(genreId: String): List<PopularMovie> {
         return retrofitService.popularMoviesByGenre(genreId).results
     }
 
-    override fun saveGenre(genre: Genre) {
-        this.genre = genre
+    override fun saveSelectedPopularMovie(popularMovie: PopularMovie) {
+        this.selectedPopularMovie = popularMovie
     }
 
-    override fun loadGenre(): Genre {
-        return genre
+    override fun loadSelectedPopularMovie(): PopularMovie {
+        return selectedPopularMovie
     }
 }
