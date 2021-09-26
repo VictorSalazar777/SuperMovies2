@@ -31,23 +31,12 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Screen content -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_menu_container_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context=".ui.MainActivity">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_movies"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toTopOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

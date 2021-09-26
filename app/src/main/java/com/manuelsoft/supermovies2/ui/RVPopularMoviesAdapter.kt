@@ -2,7 +2,6 @@ package com.manuelsoft.supermovies2.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.manuelsoft.supermovies2.databinding.ListItemBinding
