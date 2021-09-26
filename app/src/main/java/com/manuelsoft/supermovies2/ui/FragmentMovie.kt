@@ -3,30 +3,32 @@ package com.manuelsoft.supermovies2.ui
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.manuelsoft.supermovies2.databinding.ActivityGenreBinding
+import com.manuelsoft.supermovies2.R
+import com.manuelsoft.supermovies2.databinding.FragmentMovieBinding
 import com.manuelsoft.supermovies2.model.PopularMovie
 
+class FragmentMovie : Fragment(R.layout.fragment_movie) {
 
-class GenreActivity : AppCompatActivity() {
-
-    val TAG = GenreActivity::class.java.name
-    private lateinit var binding: ActivityGenreBinding
+    private lateinit var binding: FragmentMovieBinding
     private lateinit var popularMovie: PopularMovie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGenreBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    }
 
-        setupToolbar()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentMovieBinding.bind(view)
 
-        val viewModel = Injector.getInjector(this).getGenreActivityViewModel(this)
+        val viewModel = Injector.getInjector(requireContext())
+            .getFragmentMovieViewModel(this)
+
         popularMovie = viewModel.loadSelectedPopularMovie()
 
         getPoster(popularMovie.posterPath)
@@ -69,10 +71,5 @@ class GenreActivity : AppCompatActivity() {
             })
             .into(binding.ivPoster)
     }
-
-    private fun setupToolbar() {
-        setSupportActionBar(binding.toolbar2)
-    }
-
 
 }

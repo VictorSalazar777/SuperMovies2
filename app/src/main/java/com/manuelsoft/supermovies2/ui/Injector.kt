@@ -13,10 +13,10 @@ class Injector(private var repository: Repository) {
             .get(MainActivityViewModel::class.java)
     }
 
-    fun getGenreActivityViewModel(activity: GenreActivity): GenreActivityViewModel {
+    fun getFragmentMovieViewModel(fragment: FragmentMovie): FragmentMovieViewModel {
         val viewModelFactory = ViewModelFactory(repository)
-        return ViewModelProvider(activity, viewModelFactory)
-            .get(GenreActivityViewModel::class.java)
+        return ViewModelProvider(fragment, viewModelFactory)
+            .get(FragmentMovieViewModel::class.java)
     }
 
     companion object {

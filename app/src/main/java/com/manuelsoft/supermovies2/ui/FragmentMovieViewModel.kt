@@ -10,9 +10,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
-class GenreActivityViewModel(private val repository: Repository) : BaseViewModel() {
+class FragmentMovieViewModel(private val repository: Repository) : BaseViewModel() {
 
-    val TAG = GenreActivityViewModel::class.java.name
+    val TAG = FragmentMovieViewModel::class.java.name
 
     private val _popularMovies = MutableLiveData<List<PopularMovie>>()
 

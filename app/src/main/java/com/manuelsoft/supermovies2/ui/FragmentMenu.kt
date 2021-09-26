@@ -18,6 +18,7 @@ import com.manuelsoft.supermovies2.databinding.FragmentMenuBinding
 import com.manuelsoft.supermovies2.databinding.ListItemBinding
 import com.manuelsoft.supermovies2.model.PopularMovie
 
+
 class FragmentMenu : Fragment(R.layout.fragment_menu) {
 
     private lateinit var binding: FragmentMenuBinding
@@ -124,13 +125,15 @@ class FragmentMenu : Fragment(R.layout.fragment_menu) {
     private fun setOpenSelectedMovie() {
         rvPopularMoviesAdapter.setOpenSelectedMovie {
             viewModel.saveSelectedPopularMovie(it)
-            startGenreActivity()
+            startFragmentMovie()
         }
     }
 
-    private fun startGenreActivity() {
-        val intent = Intent(requireContext(), GenreActivity::class.java)
-        startActivity(intent)
+    private fun startFragmentMovie() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_menu_container_view, FragmentMovie::class.java, null, null)
+            .addToBackStack(null)
+            .commit()
     }
 
 

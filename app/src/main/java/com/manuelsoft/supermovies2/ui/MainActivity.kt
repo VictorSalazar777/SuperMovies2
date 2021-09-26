@@ -7,6 +7,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.databinding.ActivityMainBinding
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         setupNavigationView()
         observeGenresFromViewModel()
         viewModel.loadGenres()
+        listenOnBackStateChanged()
     }
 
     private fun setupNavigationView() {
@@ -53,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             toolbar.setNavigationOnClickListener {
                 openDrawer()
             }
+
         }
     }
 
@@ -67,10 +71,44 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))  {
             hideDrawer()
+            return
         }
-        else {
-            super.onBackPressed()
+        super.onBackPressed()
+    }
+
+    private fun listenOnBackStateChanged() {
+        supportFragmentManager.addOnBackStackChangedListener {
+            val currentFragment = getCurrentFragment()
+            if (currentFragment is FragmentMenu) {
+                showNavigationIcon()
+                unlockNavigationDrawer()
+                return@addOnBackStackChangedListener
+            }
+            if (currentFragment is FragmentMovie) {
+                lockNavigationDrawer()
+                clearNavigationIcon()
+            }
         }
+    }
+
+    private fun getCurrentFragment(): Fragment? {
+        return supportFragmentManager.findFragmentById(R.id.fragment_menu_container_view)
+    }
+
+    private fun lockNavigationDrawer() {
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    private fun unlockNavigationDrawer() {
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    }
+
+    private fun showNavigationIcon() {
+        binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+    }
+
+    private fun clearNavigationIcon() {
+        binding.toolbar.setNavigationIcon(null)
     }
 
     private fun createViewModel() {
