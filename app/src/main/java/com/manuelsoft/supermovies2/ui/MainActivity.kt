@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addMenuFragment(savedInstanceState)
+        addFragmentMenu(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             toolbar.setNavigationOnClickListener {
                 openDrawer()
             }
-
         }
     }
 
@@ -80,13 +79,15 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.addOnBackStackChangedListener {
             val currentFragment = getCurrentFragment()
             if (currentFragment is FragmentMenu) {
-                showNavigationIcon()
+                showMenuNavigationIcon()
                 unlockNavigationDrawer()
+                openNavigationDrawerOnMenuIconClick()
                 return@addOnBackStackChangedListener
             }
             if (currentFragment is FragmentMovie) {
                 lockNavigationDrawer()
-                clearNavigationIcon()
+                showArrowBackNavigationIcon()
+                navigateUpOnArrowBackIconClick()
             }
         }
     }
@@ -103,12 +104,28 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
-    private fun showNavigationIcon() {
+    private fun showMenuNavigationIcon() {
         binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+    }
+
+    private fun showArrowBackNavigationIcon() {
+        binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
     }
 
     private fun clearNavigationIcon() {
         binding.toolbar.setNavigationIcon(null)
+    }
+
+    private fun openNavigationDrawerOnMenuIconClick() {
+        binding.toolbar.setNavigationOnClickListener {
+            openDrawer()
+        }
+    }
+
+    private fun navigateUpOnArrowBackIconClick() {
+        binding.toolbar.setNavigationOnClickListener {
+            supportFragmentManager.popBackStack()
+        }
     }
 
     private fun createViewModel() {
@@ -141,18 +158,17 @@ class MainActivity : AppCompatActivity() {
         viewModel.loadFavoriteMoviesByGenre(id)
     }
 
-
     private fun loadFirstGenre(genres: List<Genre>) {
         viewModel.loadFavoriteMoviesByGenre(genres[0].id.toString())
     }
 
-    private fun addMenuFragment(savedInstanceState: Bundle?) {
+    private fun addFragmentMenu(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
-            supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                add(R.id.fragment_menu_container_view, FragmentMenu::class.java, null)
-            }
+            supportFragmentManager
+                .commit {
+                    setReorderingAllowed(true)
+                    add(R.id.fragment_menu_container_view, FragmentMenu::class.java, null)
+                }
         }
     }
-
 }

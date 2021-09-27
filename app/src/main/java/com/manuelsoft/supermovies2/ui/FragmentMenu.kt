@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -130,11 +131,16 @@ class FragmentMenu : Fragment(R.layout.fragment_menu) {
     }
 
     private fun startFragmentMovie() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_menu_container_view, FragmentMovie::class.java, null, null)
-            .addToBackStack(null)
-            .commit()
+        requireActivity().supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            setCustomAnimations(
+                android.R.animator.fade_in,
+                android.R.animator.fade_out,
+                android.R.animator.fade_in,
+                android.R.animator.fade_out
+            )
+            replace(R.id.fragment_menu_container_view, FragmentMovie::class.java, null, null)
+            addToBackStack(null)
+        }
     }
-
-
 }

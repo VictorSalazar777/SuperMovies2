@@ -13,11 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperMovies2" >
         <activity
-            android:name=".ui.GenreActivity"
-            android:exported="true"
-            android:label="@string/title_activity_genre"
-            android:theme="@style/Theme.SuperMovies2.NoActionBar" />
-        <activity
             android:name=".ui.MainActivity"
             android:exported="true" >
             <intent-filter>
