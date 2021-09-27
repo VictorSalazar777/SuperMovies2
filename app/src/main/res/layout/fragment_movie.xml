@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@color/black"
     tools:context=".ui.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:fillViewport="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,8 +26,8 @@
             android:orientation="vertical"
             >
             <FrameLayout
-                android:layout_width="270dp"
-                android:layout_height="450dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 >
                 <ProgressBar
@@ -34,9 +38,10 @@
                     android:visibility="visible" />
                 <ImageView
                     android:id="@+id/iv_poster"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:contentDescription="@string/movie_image"
+                    android:adjustViewBounds="true"
                     tools:ignore="ImageContrastCheck" />
 
             </FrameLayout>
@@ -48,6 +53,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 tools:text="Name"
                 />
             <com.google.android.material.textview.MaterialTextView
@@ -56,12 +62,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="@string/title_overview"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_movie_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 tools:text="This is the overview"
                 />
             <com.google.android.material.textview.MaterialTextView
@@ -71,11 +79,13 @@
                 android:text="@string/title_release_date"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 tools:text="01 - 01 -2000"
                 />
             <com.google.android.material.textview.MaterialTextView
@@ -85,11 +95,13 @@
                 android:text="@string/title_original_language"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_original_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 tools:text="en"
                 />
 

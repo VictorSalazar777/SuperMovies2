@@ -3,13 +3,5 @@
     <group
         android:id="@+id/group_1"
         android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/item_android"
-            android:title="android"/>
-        <item
-            android:id="@+id/item_ios"
-            android:title="ios"/>
-
     </group>
 </menu>

@@ -8,6 +8,7 @@ import androidx.fragment.app.commit
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -64,8 +65,6 @@ class FragmentMenu : Fragment(R.layout.fragment_menu) {
                     false
                 )
             adapter = rvPopularMoviesAdapter
-            addItemDecoration(DividerItemDecoration(this.context, GridLayoutManager.VERTICAL))
-            addItemDecoration(DividerItemDecoration(this.context, GridLayoutManager.HORIZONTAL))
         }
     }
 
