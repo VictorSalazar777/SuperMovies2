@@ -15,12 +15,8 @@ import com.manuelsoft.supermovies2.model.PopularMovie
 
 class FragmentMovie : Fragment(R.layout.fragment_movie) {
 
-    private lateinit var binding: FragmentMovieBinding
+    private var binding: FragmentMovieBinding? = null
     private lateinit var popularMovie: PopularMovie
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,7 +29,7 @@ class FragmentMovie : Fragment(R.layout.fragment_movie) {
 
         getPoster(popularMovie.posterPath)
 
-        binding.apply {
+        binding?.apply {
             tvMovieName.text = popularMovie.title
             tvMovieOverview.text = popularMovie.overview
             tvReleaseDate.text = popularMovie.releaseDate
@@ -43,33 +39,41 @@ class FragmentMovie : Fragment(R.layout.fragment_movie) {
 
     private fun getPoster(path: String) {
         val url = "https://image.tmdb.org/t/p/w300$path"
-        binding.progressCircular.visibility = View.VISIBLE
-        Glide.with(this)
-            .load(url)
-            .listener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    binding.progressCircular.visibility = View.GONE
-                    return false
-                }
 
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    binding.progressCircular.visibility = View.GONE
-                    return false
-                }
+        binding?.let { binding ->
+            binding.progressCircular.visibility = View.VISIBLE
+            Glide.with(this)
+                .load(url)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        binding.progressCircular.visibility = View.GONE
+                        return false
+                    }
 
-            })
-            .into(binding.ivPoster)
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        binding.progressCircular.visibility = View.GONE
+                        return false
+                    }
+
+                })
+                .into(binding.ivPoster)
+        }
     }
 
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
+    }
 }
+

@@ -1,6 +1,5 @@
 package com.manuelsoft.supermovies2.ui
 
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
@@ -22,7 +21,7 @@ import com.manuelsoft.supermovies2.model.PopularMovie
 
 class FragmentMenu : Fragment(R.layout.fragment_menu) {
 
-    private lateinit var binding: FragmentMenuBinding
+    private var binding: FragmentMenuBinding? = null
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var rvPopularMoviesAdapter: RVPopularMoviesAdapter
 
@@ -57,11 +56,13 @@ class FragmentMenu : Fragment(R.layout.fragment_menu) {
     }
 
     private fun setupGenresRecyclerView() {
-        binding.rvPopularMovies.apply {
+        binding?.rvPopularMovies?.apply {
             layoutManager =
-                GridLayoutManager(this.context,
+                GridLayoutManager(
+                    this.context,
                     2, RecyclerView.VERTICAL,
-                    false)
+                    false
+                )
             adapter = rvPopularMoviesAdapter
             addItemDecoration(DividerItemDecoration(this.context, GridLayoutManager.VERTICAL))
             addItemDecoration(DividerItemDecoration(this.context, GridLayoutManager.HORIZONTAL))
@@ -74,7 +75,7 @@ class FragmentMenu : Fragment(R.layout.fragment_menu) {
         })
     }
 
-    private fun showPopularMoviesOfTheSelectedGenre(popularMovies : List<PopularMovie>) {
+    private fun showPopularMoviesOfTheSelectedGenre(popularMovies: List<PopularMovie>) {
         if (rvPopularMoviesAdapter.itemCount > 0) {
             rvPopularMoviesAdapter.removeDataWithoutNotify()
             rvPopularMoviesAdapter.notifyDataChanged()
@@ -142,5 +143,10 @@ class FragmentMenu : Fragment(R.layout.fragment_menu) {
             replace(R.id.fragment_menu_container_view, FragmentMovie::class.java, null, null)
             addToBackStack(null)
         }
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
     }
 }
