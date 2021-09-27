@@ -25,11 +25,14 @@ class RetrofitServiceImpl(context: Context) : RetrofitService {
     }
 
     override suspend fun popularMoviesByGenre(genreId: String): PopularMoviesByGenreEntry {
+
+        // Include family genre in all queries
+        val familyId = "10751"
+        val genreIds = "$genreId,$familyId"
+
         return retrofitApi.popularMoviesByGenre(
             apiKey, "popularity.desc",
-            "false", genreId
+            "false", genreIds
         )
     }
-
-
 }
