@@ -10,8 +10,6 @@ import java.util.*
 
 class RVPopularMoviesAdapter : RecyclerView.Adapter<RVPopularMoviesAdapter.MyViewHolder>() {
 
-    val TAG = RVPopularMoviesAdapter::class.java.name
-
     private lateinit var openSelectedMovie: (PopularMovie) -> Unit
     private lateinit var loadSmallImage: (String, ListItemBinding) -> Unit
     private var popularMovies: MutableList<PopularMovie> = LinkedList()

@@ -1,13 +1,13 @@
 package com.manuelsoft.supermovies2.repository
 
-import android.content.Context
 import com.manuelsoft.supermovies2.model.Genre
 import com.manuelsoft.supermovies2.model.PopularMovie
-import com.manuelsoft.supermovies2.network.RetrofitServiceImpl
+import com.manuelsoft.supermovies2.network.RetrofitService
+import javax.inject.Inject
 
-class RepositoryImpl(context: Context) : Repository {
 
-    private val retrofitService = RetrofitServiceImpl(context)
+class RepositoryImpl @Inject constructor(private val retrofitService: RetrofitService) : Repository {
+
     private lateinit var selectedPopularMovie: PopularMovie
 
     override suspend fun getGenres(): List<Genre> {

@@ -8,10 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitProvider {
 
     companion object {
-        fun getRetrofitService(baseUrl: String): RetrofitApi {
+        fun getRetrofitService(baseUrl: String): MoviesDbApi {
             return RetrofitProvider()
                 .buildRetrofit(baseUrl)
-                .create(RetrofitApi::class.java)
+                .create(MoviesDbApi::class.java)
         }
     }
 

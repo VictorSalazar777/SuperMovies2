@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu.NONE
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
@@ -13,16 +14,17 @@ import androidx.fragment.app.commit
 import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.databinding.ActivityMainBinding
 import com.manuelsoft.supermovies2.model.Genre
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel : MainActivityViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainActivityViewModel
     private lateinit var navGenreMenuItems: MutableList<MenuItem>
 
     companion object {
-        @JvmStatic
         val TAG: String = MainActivity::class.java.name
     }
 
@@ -32,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
-        createViewModel()
         setupNavigationView()
         observeGenresFromViewModel()
         viewModel.loadGenres()
@@ -126,10 +127,6 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             supportFragmentManager.popBackStack()
         }
-    }
-
-    private fun createViewModel() {
-        viewModel = Injector.getInjector(this).getMainActivityViewModel(this)
     }
 
     private fun observeGenresFromViewModel() {

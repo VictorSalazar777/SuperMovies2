@@ -6,7 +6,7 @@ import com.manuelsoft.supermovies2.network.entries.PopularMoviesByGenreEntry
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface RetrofitApi {
+interface MoviesDbApi {
 
     @GET("genre/movie/list")
     suspend fun getGenres(@Query("api_key") apiKey: String): GenresEntry

@@ -5,8 +5,10 @@ import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.model.DiscoverMoviesResult
 import com.manuelsoft.supermovies2.network.entries.GenresEntry
 import com.manuelsoft.supermovies2.network.entries.PopularMoviesByGenreEntry
+import javax.inject.Inject
 
-class RetrofitServiceImpl(context: Context) : RetrofitService {
+
+class RetrofitServiceImpl @Inject constructor(context: Context) : RetrofitService {
 
     private val retrofitApi =
         RetrofitProvider.getRetrofitService(context.getString(R.string.base_url))

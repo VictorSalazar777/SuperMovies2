@@ -7,12 +7,18 @@ import androidx.lifecycle.viewModelScope
 import com.manuelsoft.supermovies2.model.Genre
 import com.manuelsoft.supermovies2.model.PopularMovie
 import com.manuelsoft.supermovies2.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainActivityViewModel(private val repository: Repository) : BaseViewModel() {
 
-    val TAG = MainActivityViewModel::class.java.name
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(private val repository: Repository) : BaseViewModel() {
+
+    companion object {
+        val TAG: String = MainActivityViewModel::class.java.name
+    }
 
     private val _genres = MutableLiveData<List<Genre>>()
 

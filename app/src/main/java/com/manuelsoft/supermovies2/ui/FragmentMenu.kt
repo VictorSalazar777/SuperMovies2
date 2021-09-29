@@ -2,13 +2,13 @@ package com.manuelsoft.supermovies2.ui
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -18,33 +18,22 @@ import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.databinding.FragmentMenuBinding
 import com.manuelsoft.supermovies2.databinding.ListItemBinding
 import com.manuelsoft.supermovies2.model.PopularMovie
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FragmentMenu : Fragment(R.layout.fragment_menu) {
 
+    private val viewModel: MainActivityViewModel by activityViewModels()
     private var binding: FragmentMenuBinding? = null
-    private lateinit var viewModel: MainActivityViewModel
     private lateinit var rvPopularMoviesAdapter: RVPopularMoviesAdapter
 
     companion object {
-        @JvmStatic
         val TAG: String = FragmentMenu::class.java.name
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        getViewModel()
-    }
-
-    private fun getViewModel() {
-        viewModel = Injector.getInjector(requireContext())
-            .getMainActivityViewModel(requireActivity() as MainActivity)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMenuBinding.bind(view)
-
         createGenresRecyclerViewAdapter()
         setupGenresRecyclerView()
         setLoadSmallImage()
@@ -105,6 +94,7 @@ class FragmentMenu : Fragment(R.layout.fragment_menu) {
                     isFirstResource: Boolean
                 ): Boolean {
                     listItemBinding.progressCircularPosterSmall.visibility = View.GONE
+                    Log.e(TAG, "onLoadFailed: ${e.toString()}")
                     return false
                 }
 
