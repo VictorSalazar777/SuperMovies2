@@ -1,29 +1,26 @@
 package com.manuelsoft.supermovies2.network
 
-import android.content.Context
-import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.model.DiscoverMoviesResult
 import com.manuelsoft.supermovies2.network.entries.GenresEntry
 import com.manuelsoft.supermovies2.network.entries.PopularMoviesByGenreEntry
 import javax.inject.Inject
 
 
-class RetrofitServiceImpl @Inject constructor(context: Context) : RetrofitService {
-
-    private val retrofitApi =
-        RetrofitProvider.getRetrofitService(context.getString(R.string.base_url))
-    private val apiKey = context.getString(R.string.themoviedb_api_key)
+class RetrofitServiceImpl
+@Inject
+constructor(private val moviesDbApi: MoviesDbApi,
+            private val apiKey: String) : RetrofitService {
 
     override suspend fun getGenres(): GenresEntry {
-        return retrofitApi.getGenres(apiKey)
+        return moviesDbApi.getGenres(apiKey)
     }
 
     override suspend fun getDiscoveredMovies(): DiscoverMoviesResult {
-        return retrofitApi.discoverMovies(apiKey)
+        return moviesDbApi.discoverMovies(apiKey)
     }
 
     override suspend fun getDiscoveredMovies(genre: String): DiscoverMoviesResult {
-        return retrofitApi.discoverMovies(apiKey, genre)
+        return moviesDbApi.discoverMovies(apiKey, genre)
     }
 
     override suspend fun popularMoviesByGenre(genreId: String): PopularMoviesByGenreEntry {
@@ -32,7 +29,7 @@ class RetrofitServiceImpl @Inject constructor(context: Context) : RetrofitServic
         val familyId = "10751"
         val genreIds = "$genreId,$familyId"
 
-        return retrofitApi.popularMoviesByGenre(
+        return moviesDbApi.popularMoviesByGenre(
             apiKey, "popularity.desc",
             "false", genreIds
         )

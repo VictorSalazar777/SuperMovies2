@@ -1,6 +1,8 @@
 package com.manuelsoft.supermovies2.di
 
 import android.content.Context
+import com.manuelsoft.supermovies2.R
+import com.manuelsoft.supermovies2.network.RetrofitProvider
 import com.manuelsoft.supermovies2.network.RetrofitService
 import com.manuelsoft.supermovies2.network.RetrofitServiceImpl
 import com.manuelsoft.supermovies2.repository.Repository
@@ -20,7 +22,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRetrofitService(@ApplicationContext context: Context): RetrofitService {
-        return RetrofitServiceImpl(context)
+        val moviesDbApi =
+            RetrofitProvider.getRetrofitService(context.getString(R.string.base_url))
+        val apiKey = context.getString(R.string.themoviedb_api_key)
+        return RetrofitServiceImpl(moviesDbApi, apiKey)
     }
 
     @Provides
