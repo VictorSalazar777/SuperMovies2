@@ -1,4 +1,4 @@
-package com.manuelsoft.supermovies2.ui
+package com.manuelsoft.supermovies2.ui.main
 
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +14,7 @@ import androidx.fragment.app.commit
 import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.databinding.ActivityMainBinding
 import com.manuelsoft.supermovies2.model.Genre
+import com.manuelsoft.supermovies2.ui.movie.FragmentMovie
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.manuelsoft.supermovies2.ui
+package com.manuelsoft.supermovies2.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.manuelsoft.supermovies2.databinding.ListItemBinding
 import com.manuelsoft.supermovies2.model.PopularMovie
+import dagger.hilt.android.scopes.FragmentScoped
 import java.util.*
 
+@FragmentScoped
 class RVPopularMoviesAdapter : RecyclerView.Adapter<RVPopularMoviesAdapter.MyViewHolder>() {
 
     private lateinit var openSelectedMovie: (PopularMovie) -> Unit

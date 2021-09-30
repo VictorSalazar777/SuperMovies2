@@ -1,4 +1,4 @@
-package com.manuelsoft.supermovies2.ui
+package com.manuelsoft.supermovies2.ui.main
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -18,14 +18,19 @@ import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.databinding.FragmentMenuBinding
 import com.manuelsoft.supermovies2.databinding.ListItemBinding
 import com.manuelsoft.supermovies2.model.PopularMovie
+import com.manuelsoft.supermovies2.ui.movie.FragmentMovie
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentMenu : Fragment(R.layout.fragment_menu) {
 
     private val viewModel: MainActivityViewModel by activityViewModels()
+
+    @Inject
+    lateinit var rvPopularMoviesAdapter: RVPopularMoviesAdapter
+
     private var binding: FragmentMenuBinding? = null
-    private lateinit var rvPopularMoviesAdapter: RVPopularMoviesAdapter
 
     companion object {
         val TAG: String = FragmentMenu::class.java.name
@@ -34,15 +39,10 @@ class FragmentMenu : Fragment(R.layout.fragment_menu) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMenuBinding.bind(view)
-        createGenresRecyclerViewAdapter()
         setupGenresRecyclerView()
         setLoadSmallImage()
         setOpenSelectedMovie()
         observePopularMoviesFromViewModel()
-    }
-
-    private fun createGenresRecyclerViewAdapter() {
-        rvPopularMoviesAdapter = RVPopularMoviesAdapter()
     }
 
     private fun setupGenresRecyclerView() {

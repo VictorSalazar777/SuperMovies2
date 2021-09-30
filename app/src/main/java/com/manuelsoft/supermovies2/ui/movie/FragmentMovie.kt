@@ -1,4 +1,4 @@
-package com.manuelsoft.supermovies2.ui
+package com.manuelsoft.supermovies2.ui.movie
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle

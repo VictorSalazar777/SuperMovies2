@@ -7,17 +7,19 @@ import com.manuelsoft.supermovies2.network.RetrofitService
 import com.manuelsoft.supermovies2.network.RetrofitServiceImpl
 import com.manuelsoft.supermovies2.repository.Repository
 import com.manuelsoft.supermovies2.repository.RepositoryImpl
+import com.manuelsoft.supermovies2.ui.main.RVPopularMoviesAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.FragmentScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object RetrofitModule {
 
     @Provides
     @Singleton
@@ -27,11 +29,4 @@ object AppModule {
         val apiKey = context.getString(R.string.themoviedb_api_key)
         return RetrofitServiceImpl(moviesDbApi, apiKey)
     }
-
-    @Provides
-    @Singleton
-    fun provideRepository(retrofitService: RetrofitService): Repository {
-        return RepositoryImpl(retrofitService)
-    }
-
 }

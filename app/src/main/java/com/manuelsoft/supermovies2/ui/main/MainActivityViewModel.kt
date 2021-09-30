@@ -1,4 +1,4 @@
-package com.manuelsoft.supermovies2.ui
+package com.manuelsoft.supermovies2.ui.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.manuelsoft.supermovies2.model.Genre
 import com.manuelsoft.supermovies2.model.PopularMovie
 import com.manuelsoft.supermovies2.repository.Repository
+import com.manuelsoft.supermovies2.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
