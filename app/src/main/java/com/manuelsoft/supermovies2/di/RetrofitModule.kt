@@ -5,14 +5,10 @@ import com.manuelsoft.supermovies2.R
 import com.manuelsoft.supermovies2.network.RetrofitProvider
 import com.manuelsoft.supermovies2.network.RetrofitService
 import com.manuelsoft.supermovies2.network.RetrofitServiceImpl
-import com.manuelsoft.supermovies2.repository.Repository
-import com.manuelsoft.supermovies2.repository.RepositoryImpl
-import com.manuelsoft.supermovies2.ui.main.RVPopularMoviesAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.FragmentScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
