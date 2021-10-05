@@ -20,9 +20,10 @@ I used:
 * Material library.
 * Fragments.
 
-
-![screenshot1](../screenshots/supermovies2-1.png "MyPomodoroApp screenshot")  ![screenshot2](../screenshots/supermovies2-2.png "MyPomodoroApp screenshot2")
-<p align="center" width="100%">
-    <img src="../screenshots/supermovies2-3.png" alt="screenshot3">
+<p float="left">
+  <img src="../screenshots/supermovies2-1.png" width="30%" alt="screenshot1"/>
+  <img src="../screenshots/supermovies2-2.png" width="30%" alt="screenshot2"/> 
+  <img src="../screenshots/supermovies2-3.png" width="30%" alt="screenshot3"/>
 </p>
+
 
