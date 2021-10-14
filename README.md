@@ -1,4 +1,4 @@
-# SuperMovies2
+# Supermovies2
 
 This app shows list of movies from https://api.themoviedb.org/3/ using
 the API they provide.
